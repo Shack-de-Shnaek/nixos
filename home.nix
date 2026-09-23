@@ -94,6 +94,7 @@
 	];
 
 	xdg.configFile."hypr".source = ./dotfiles/hypr;
+	xdg.configFile."nvim".source = ./dotfiles/nvim;
 	xdg.mimeApps = {
 	  enable = true;
 	  defaultApplications = {
