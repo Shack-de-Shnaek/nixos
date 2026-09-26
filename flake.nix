@@ -40,8 +40,34 @@
           }
         ];
       };
+      nixosConfigurations."${host_name_prefix}-server" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/server/configuration.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.dragan = import ./home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+          }
+        ];
+      };
+
 
       homeConfigurations."${host_name_prefix}-laptop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = { inherit inputs; };
+        modules = [ ./home.nix ];
+      };
+
+      homeConfigurations."${host_name_prefix}-server" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "x86_64-linux";
           config.allowUnfree = true;
