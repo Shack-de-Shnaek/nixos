@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "ehci_pci" "ata_piix" "usb_storage" "usbhid" "sd_mod" ];
@@ -14,28 +15,56 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/75e29283-9b55-4670-96ad-310b5191bfcc";
+    {
+      device = "/dev/disk/by-uuid/75e29283-9b55-4670-96ad-310b5191bfcc";
       fsType = "btrfs";
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/75e29283-9b55-4670-96ad-310b5191bfcc";
+    {
+      device = "/dev/disk/by-uuid/75e29283-9b55-4670-96ad-310b5191bfcc";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
+      options = [
+        "subvol=nix"
+      ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8C5C-2F83";
+    {
+      device = "/dev/disk/by-uuid/8C5C-2F83";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/92ce20d2-8be1-4998-b6ce-59fb7ebdffda";
+    {
+      device = "/dev/disk/by-uuid/92ce20d2-8be1-4998-b6ce-59fb7ebdffda";
       fsType = "btrfs";
     };
 
-  swapDevices = [ ];
+  fileSystems."/mnt/hdd" = {
+    device = "/dev/sdb1";
+    fsType = "btrfs";
+    options = [
+      "compression=zstd9"
+      "nofail"
+    ];
+  };
+
+  zramSwap = {
+    enable = true;
+    algorithm = "lz4";
+    memoryPercent = 150;
+    priority = 100;
+  };
+
+  # swapDevices = [
+  #   {
+  #     device = "/swapfile";
+  #     size = 32 * 1024;
+  #     priority = 10;
+  #   }
+  # ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

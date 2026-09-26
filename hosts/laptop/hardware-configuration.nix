@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
@@ -14,46 +15,59 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/93feb999-c102-4fff-8c26-838d2613d959";
+    {
+      device = "/dev/disk/by-uuid/93feb999-c102-4fff-8c26-838d2613d959";
       fsType = "btrfs";
+      options = [
+        "compression=zstd"
+      ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/93feb999-c102-4fff-8c26-838d2613d959";
+    {
+      device = "/dev/disk/by-uuid/93feb999-c102-4fff-8c26-838d2613d959";
       fsType = "btrfs";
       options = [ "subvol=nix" ];
+      options = [
+        "compression=zstd"
+      ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/B502-CC67";
+    {
+      device = "/dev/disk/by-uuid/B502-CC67";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/6dc173c5-f7f2-4e78-b1d6-425d44c81191";
+    {
+      device = "/dev/disk/by-uuid/6dc173c5-f7f2-4e78-b1d6-425d44c81191";
       fsType = "btrfs";
+      options = [
+        "compression=zstd"
+      ];
     };
 
   zramSwap = {
-  	enable = true;
-	algorithm = "lz4";
-	memoryPercent = 150;
-	priority = 100;
+    enable = true;
+    algorithm = "lz4";
+    memoryPercent = 150;
+    priority = 100;
   };
 
   swapDevices = [
-  	{
-		device = "/swapfile";
-		size = 32 * 1024;
-		priority = 10;
-	}
+    {
+      device = "/swapfile";
+      size = 32 * 1024;
+      priority = 10;
+    }
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   hardware.graphics = {
-  	enable = true;
+    enable = true;
   };
 }
