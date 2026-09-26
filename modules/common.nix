@@ -57,17 +57,6 @@
     shell = pkgs.fish;
   };
 
-  services.displayManager.noctalia-greeter = {
-    enable = true;
-    settings = {
-      cursor = {
-        theme = "Bibata-Modern-Ice";
-        size = 24;
-        path = "${pkgs.bibata-cursors}/share/icons";
-      };
-    };
-  };
-
   systemd.services.NetworkManager-wait-online.enable = false;
 
   nixpkgs.config.allowUnfree = true;

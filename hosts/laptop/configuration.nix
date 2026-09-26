@@ -5,6 +5,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/common.nix
+      ../../modules/graphical_session.nix
       ../../modules/work.nix
       ../../modules/power-management.nix
       inputs.home-manager.nixosModules.default
