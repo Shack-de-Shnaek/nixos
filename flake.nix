@@ -22,6 +22,7 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       host_name_prefix = "dragan";
+      system = "x86_64-linux";
     in
     {
       nixosConfigurations."${host_name_prefix}-laptop" = nixpkgs.lib.nixosSystem {
@@ -57,17 +58,7 @@
         ];
       };
 
-
-      homeConfigurations."${host_name_prefix}-laptop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-        extraSpecialArgs = { inherit inputs; };
-        modules = [ ./home.nix ];
-      };
-
-      homeConfigurations."${host_name_prefix}-server" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."${host_name_prefix}" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "x86_64-linux";
           config.allowUnfree = true;
