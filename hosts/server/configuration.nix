@@ -8,8 +8,9 @@
   imports =
     [
       ./hardware-configuration.nix
-	../../modules/common.nix
-	inputs.home-manager.nixosModules.default
+      ../../modules/common.nix
+      ../../modules/media-host.nix
+      inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
@@ -25,17 +26,22 @@
   networking.hostName = "dragan-server"; # Define your hostname.
 
   environment.systemPackages = with pkgs; [
-  	vim
-  	wget
-	git
-	neovim
-	curl
-	killall
+    vim
+    wget
+    git
+    neovim
+    curl
+    killall
   ];
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.nfs.server = {
+    enable = true;
+    exports = ''
+      /mnt/hdd    192.168.50/24(rw,sync)
+    '';
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

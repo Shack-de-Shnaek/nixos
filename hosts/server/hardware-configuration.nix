@@ -18,6 +18,9 @@
     {
       device = "/dev/disk/by-uuid/75e29283-9b55-4670-96ad-310b5191bfcc";
       fsType = "btrfs";
+      options = [
+        "compress=zstd:5"
+      ];
     };
 
   fileSystems."/nix" =
@@ -25,6 +28,7 @@
       device = "/dev/disk/by-uuid/75e29283-9b55-4670-96ad-310b5191bfcc";
       fsType = "btrfs";
       options = [
+        "compress=zstd:5"
         "subvol=nix"
       ];
     };
@@ -40,13 +44,17 @@
     {
       device = "/dev/disk/by-uuid/92ce20d2-8be1-4998-b6ce-59fb7ebdffda";
       fsType = "btrfs";
+      options = [
+        "compress=zstd:5"
+      ];
     };
 
   fileSystems."/mnt/hdd" = {
-    device = "/dev/sdb1";
+
+    device = "/dev/disk/by-uuid/10eed79d-a0f9-4517-8fa3-256ed93d58f2";
     fsType = "btrfs";
     options = [
-      "compression=zstd9"
+      "compress=zstd:9"
       "nofail"
     ];
   };
