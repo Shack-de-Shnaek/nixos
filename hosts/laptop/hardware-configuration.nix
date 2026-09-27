@@ -19,7 +19,7 @@
       device = "/dev/disk/by-uuid/93feb999-c102-4fff-8c26-838d2613d959";
       fsType = "btrfs";
       options = [
-        "compression=zstd"
+        "compress=zstd"
       ];
     };
 
@@ -29,7 +29,7 @@
       fsType = "btrfs";
       options = [
         "subvol=nix"
-        "compression=zstd"
+        "compress=zstd"
       ];
     };
 
@@ -45,7 +45,7 @@
       device = "/dev/disk/by-uuid/6dc173c5-f7f2-4e78-b1d6-425d44c81191";
       fsType = "btrfs";
       options = [
-        "compression=zstd"
+        "compress=zstd"
       ];
     };
 
