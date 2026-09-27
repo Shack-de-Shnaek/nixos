@@ -39,8 +39,14 @@
   services.nfs.server = {
     enable = true;
     exports = ''
-      /mnt/hdd    192.168.50/24(rw,sync)
+      /mnt/hdd    192.168.50.0/24(rw,sync,fsid=0,no_subtree_check)
     '';
+  };
+
+  systemd.services.nfs-server = {
+    after = [ "mnt-hdd.mount" ];
+    requires = [ "mnt-hdd.mount" ];
+
   };
 
   # Open ports in the firewall.

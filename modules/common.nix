@@ -3,6 +3,8 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  boot.supportedFilesystems = [ "nfs" "nfs4" ];
+
   # Set your time zone.
   time.timeZone = "Europe/Skopje";
 
@@ -63,6 +65,8 @@
 
   systemd.services.NetworkManager-wait-online.enable = false;
 
+  services.nfs.server.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -72,6 +76,12 @@
     git
     ripgrep
     neovim
+    rPackages.treesitter
+    rPackages.treesitter_r
+    rPackages.treesitter_c
+    vimPlugins.treesitter-modules-nvim
+    neocmakelsp
+    tree-sitter
     fzf
     wget
     curl
@@ -93,4 +103,8 @@
   ];
 
   programs.fish.enable = true;
+
+  networking.firewall.allowedTCPPorts = [
+    2049 # nfs
+  ];
 }

@@ -49,6 +49,15 @@
       ];
     };
 
+  fileSystems."/mnt/nfs_server" = {
+    device = "server.net:/";
+    fsType = "nfs4";
+    options = [
+      "rw"
+      "nofail"
+    ];
+  };
+
   zramSwap = {
     enable = true;
     algorithm = "lz4";

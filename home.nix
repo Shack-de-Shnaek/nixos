@@ -3,7 +3,7 @@
 {
   imports = [
     inputs.noctalia.homeModules.default
-    ./noctalia.nix
+    ./modules/noctalia.nix
   ];
 
   home.username = "dragan";
