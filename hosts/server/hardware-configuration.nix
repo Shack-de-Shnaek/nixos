@@ -16,20 +16,10 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/75e29283-9b55-4670-96ad-310b5191bfcc";
+      device = "/dev/disk/by-uuid/c4b980c8-2156-4bdf-8acd-f3b1cb958186";
       fsType = "btrfs";
       options = [
-        "compress=zstd:5"
-      ];
-    };
-
-  fileSystems."/nix" =
-    {
-      device = "/dev/disk/by-uuid/75e29283-9b55-4670-96ad-310b5191bfcc";
-      fsType = "btrfs";
-      options = [
-        "compress=zstd:5"
-        "subvol=nix"
+        "compress=zstd"
       ];
     };
 
@@ -40,22 +30,19 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  fileSystems."/home" =
-    {
-      device = "/dev/disk/by-uuid/92ce20d2-8be1-4998-b6ce-59fb7ebdffda";
-      fsType = "btrfs";
-      options = [
-        "compress=zstd:5"
-      ];
-    };
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/92ce20d2-8be1-4998-b6ce-59fb7ebdffda";
+    fsType = "btrfs";
+    options = [
+      "compress=zstd"
+    ];
+  };
 
   fileSystems."/mnt/hdd" = {
-
     device = "/dev/disk/by-uuid/10eed79d-a0f9-4517-8fa3-256ed93d58f2";
     fsType = "btrfs";
     options = [
       "compress=zstd:9"
-      "nofail"
     ];
   };
 
@@ -66,13 +53,7 @@
     priority = 100;
   };
 
-  # swapDevices = [
-  #   {
-  #     device = "/swapfile";
-  #     size = 32 * 1024;
-  #     priority = 10;
-  #   }
-  # ];
+  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

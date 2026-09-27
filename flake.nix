@@ -46,13 +46,12 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/server/configuration.nix
-
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.dragan = import ./home.nix;
+            home-manager.users.dragan = import ./home-server.nix;
             home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];

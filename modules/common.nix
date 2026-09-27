@@ -47,8 +47,12 @@
   nix.gc = {
     automatic = true;
     dates = "daily";
-    options = "--delete-generations +5 --delete-older-than 7";
+    options = "--delete-generations +5 --delete-older-than 5d";
   };
+
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "4:00" ];
+  # nix.settings.auto-optimise-store = true;
 
   users.users."dragan" = {
     isNormalUser = true;
