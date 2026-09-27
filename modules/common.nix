@@ -89,19 +89,8 @@
     upower
     smartmontools
     rustup
-    nerd-fonts.fira-code
-    nerd-fonts.symbols-only
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
-    proggyfonts
+    nfs-utils
   ];
 
-  programs.hyprland.enable = true;
   programs.fish.enable = true;
 }
