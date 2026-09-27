@@ -27,8 +27,8 @@
     {
       device = "/dev/disk/by-uuid/93feb999-c102-4fff-8c26-838d2613d959";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
       options = [
+        "subvol=nix"
         "compression=zstd"
       ];
     };
