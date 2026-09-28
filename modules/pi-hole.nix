@@ -9,7 +9,7 @@
       ];
       dns.hosts = [
         "192.168.50.1   router.net"
-        # "192.168.10.2   router2.net"
+        "192.168.10.2   router2.net"
         "192.168.10.1   router3.net"
         "192.168.10.103 server.net"
         "192.168.10.20 dragan-desktop.net"
@@ -34,4 +34,13 @@
   networking.firewall.allowedTCPPorts = [
     8081 # pihole-web
   ];
+
+  services.resolved = {
+    enable = true;
+    settings.Resolve = {
+      DNS = [ "1.1.1.1" "9.9.9.9" ];
+      FallbackDNS = [ "1.1.1.1" "9.9.9.9" ];
+      Domains = [ "~." ];
+    };
+  };
 }
