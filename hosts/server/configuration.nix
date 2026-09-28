@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ../../modules/common.nix
       ../../modules/media-host.nix
+      # ../../modules/nvidia.nix
       inputs.home-manager.nixosModules.default
     ];
 
@@ -18,6 +19,8 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
   # Use provided UUIDs instead of blkid probing (required for btrfs subvolumes)
+  boot.kernelParams = [ "acpi_enforce_resources=lax" ];
+  boot.kernelModules = [ "coretemp" "f71882fg" "it87" "nct6687" ];
   boot.loader.grub.fsIdentifier = "provided";
 
   # Use latest kernel.
@@ -32,7 +35,16 @@
     neovim
     curl
     killall
+    hdparm
+    coolercontrol.coolercontrold
+    lm_sensors
+    bind
   ];
+
+  programs.coolercontrol = {
+    enable = true;
+  };
+
   # List services that you want to enable:
 
   services.openssh.enable = true;
@@ -43,11 +55,64 @@
     '';
   };
 
+  services.pihole-ftl = {
+    enable = true;
+    settings = {
+      dns.upstreams = [
+        "9.9.9.9"
+        "1.1.1.1"
+      ];
+    };
+    lists = [
+      {
+        url = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt";
+        type = "block";
+        enabled = true;
+        description = "hagezi blocklist";
+      }
+    ];
+  };
+
+  services.pihole-web = {
+    enable = true;
+    ports = [ "8081" ];
+  };
+
+  services.tailscale = {
+    enable = true;
+  };
+
   systemd.services.nfs-server = {
     after = [ "mnt-hdd.mount" ];
     requires = [ "mnt-hdd.mount" ];
-
   };
+
+  systemd.services.hd-idle = {
+    description = "External HD spin down daemon";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -a /dev/sdb -i 1800";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+  };
+
+  systemd.services.coolercontrold.environment = {
+    CC_HOST_IP4 = "0.0.0.0";
+    CC_HOST_IP6 = "::";
+  };
+
+  networking.firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
+
+  networking.firewall.allowedTCPPorts = [
+    11987 # coolercontrol
+    8081 # pihole-web
+  ];
+
+  networking.firewall.allowedUDPPorts = [
+    53 # dns
+    config.services.tailscale.port
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

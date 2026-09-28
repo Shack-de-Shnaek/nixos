@@ -1,0 +1,14 @@
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger] System Info:
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   ------------------------------------------------------------
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   CoolerControlD       4.3.0
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   Name                 NixOS
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   OS                   Linux (NixOS 26.05)
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   Host                 dragan-server
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   Kernel               7.2.7
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   Arch                 x86_64
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   Board Manufacturer   MSI
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   Board Name           H61M-P23 (MS-7680)
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   Board Version        3.0
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   BIOS Manufacturer    American Megatrends Inc.
+[2026-09-27T22:03:47Z INFO  coolercontrold::logger]   BIOS Version         4.6
+Error: coolercontrold must be run with root permissions
