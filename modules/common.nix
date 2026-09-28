@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   # Enable networking
   networking.networkmanager.enable = true;
@@ -71,6 +71,10 @@
 
   services.nfs.server.enable = true;
 
+  services.tailscale = {
+    enable = true;
+  };
+
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -110,5 +114,11 @@
 
   networking.firewall.allowedTCPPorts = [
     2049 # nfs
+  ];
+
+  networking.firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
+
+  networking.firewall.allowedUDPPorts = [
+    config.services.tailscale.port
   ];
 }

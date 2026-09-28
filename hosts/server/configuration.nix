@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ../../modules/common.nix
       ../../modules/media-host.nix
+      ../../modules/pi-hole.nix
       # ../../modules/nvidia.nix
       inputs.home-manager.nixosModules.default
     ];
@@ -55,33 +56,6 @@
     '';
   };
 
-  services.pihole-ftl = {
-    enable = true;
-    settings = {
-      dns.upstreams = [
-        "9.9.9.9"
-        "1.1.1.1"
-      ];
-    };
-    lists = [
-      {
-        url = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt";
-        type = "block";
-        enabled = true;
-        description = "hagezi blocklist";
-      }
-    ];
-  };
-
-  services.pihole-web = {
-    enable = true;
-    ports = [ "8081" ];
-  };
-
-  services.tailscale = {
-    enable = true;
-  };
-
   systemd.services.nfs-server = {
     after = [ "mnt-hdd.mount" ];
     requires = [ "mnt-hdd.mount" ];
@@ -102,16 +76,12 @@
     CC_HOST_IP6 = "::";
   };
 
-  networking.firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
-
   networking.firewall.allowedTCPPorts = [
     11987 # coolercontrol
-    8081 # pihole-web
   ];
 
   networking.firewall.allowedUDPPorts = [
     53 # dns
-    config.services.tailscale.port
   ];
 
   # Open ports in the firewall.
