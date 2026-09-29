@@ -37,6 +37,7 @@
     curl
     killall
     hdparm
+    hd-idle
     coolercontrol.coolercontrold
     lm_sensors
     bind
@@ -52,7 +53,7 @@
   services.nfs.server = {
     enable = true;
     exports = ''
-      /mnt/hdd    192.168.50.0/24(rw,sync,fsid=0,no_subtree_check)
+      /mnt/hdd    192.168.10.0/24(rw,sync,fsid=0,no_subtree_check)
     '';
   };
 
@@ -65,7 +66,7 @@
     description = "External HD spin down daemon";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -a /dev/sdb -i 1800";
+      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -a /dev/sdb -i 600 -a /dev/sda";
       Restart = "on-failure";
       RestartSec = 5;
     };

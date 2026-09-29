@@ -12,6 +12,9 @@
         "192.168.10.2   router2.net"
         "192.168.10.1   router3.net"
         "192.168.10.103 server.net"
+        "192.168.10.103:8081 pihole.server.net"
+        "192.168.10.103:8080 torrent.server.net"
+        "192.168.10.103:11987 coolercontrol.server.net"
         "192.168.10.20 dragan-desktop.net"
         "192.168.10.205 dragan-laptop.net"
       ];
@@ -22,6 +25,85 @@
         type = "block";
         enabled = true;
         description = "hagezi blocklist";
+      }
+
+      {
+        url = "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt";
+        type = "block";
+        enabled = true;
+        description = "KADhosts blocklist";
+      }
+      {
+        url = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts";
+        type = "block";
+        enabled = true;
+        description = "FadeMind blocklist";
+      }
+      {
+        url = "https://v.firebog.net/hosts/static/w3kbl.txt";
+        type = "block";
+        enabled = true;
+        description = "firebog blocklist";
+      }
+
+
+      {
+        url = "https://adaway.org/hosts.txt";
+        type = "block";
+        enabled = true;
+        description = "adaway blocklist";
+      }
+      {
+        url = "https://v.firebog.net/hosts/AdguardDNS.txt";
+        type = "block";
+        enabled = true;
+        description = "adguard blocklist";
+      }
+      {
+        url = "https://v.firebog.net/hosts/Admiral.txt";
+        type = "block";
+        enabled = true;
+        description = "firebog admiral blocklist";
+      }
+
+
+      {
+        url = "https://v.firebog.net/hosts/Easyprivacy.txt";
+        type = "block";
+        enabled = true;
+        description = "Easyprivacy blocklist";
+      }
+      {
+        url = "https://v.firebog.net/hosts/Prigent-Ads.txt";
+        type = "block";
+        enabled = true;
+        description = "prigent ads blocklist";
+      }
+      {
+        url = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts";
+        type = "block";
+        enabled = true;
+        description = "fademind extra blocklist";
+      }
+
+
+      {
+        url = "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt";
+        type = "block";
+        enabled = true;
+        description = "DandelionSprout blocklist";
+      }
+      {
+        url = "https://v.firebog.net/hosts/Prigent-Crypto.txt";
+        type = "block";
+        enabled = true;
+        description = "prigent crypto blocklist";
+      }
+      {
+        url = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts";
+        type = "block";
+        enabled = true;
+        description = "fademind extra extra blocklist";
       }
     ];
   };
