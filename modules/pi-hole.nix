@@ -11,13 +11,12 @@
         "192.168.50.1   router.net"
         "192.168.10.2   router2.net"
         "192.168.10.1   router3.net"
-        "192.168.10.103 server.net"
-        "192.168.10.103:8081 pihole.server.net"
-        "192.168.10.103:8080 torrent.server.net"
-        "192.168.10.103:11987 coolercontrol.server.net"
         "192.168.10.20 dragan-desktop.net"
         "192.168.10.205 dragan-laptop.net"
       ];
+        misc.dnsmasq_lines = [
+        "address=/server.net/192.168.10.103"
+        ];
     };
     lists = [
       {

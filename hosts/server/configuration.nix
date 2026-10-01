@@ -24,24 +24,30 @@
   boot.kernelModules = [ "coretemp" "f71882fg" "it87" "nct6687" ];
   boot.loader.grub.fsIdentifier = "provided";
 
-  # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages;
 
   networking.hostName = "dragan-server"; # Define your hostname.
 
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
-    neovim
-    curl
-    killall
-    hdparm
-    hd-idle
-    coolercontrol.coolercontrold
-    lm_sensors
-    bind
-  ];
+  # hardware.graphics.enable = true;
+  # hardware.nvidia.open = true;
+  # services.xserver.videoDrivers = [ "nvidia" ];
+  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+
+  environment.systemPackages = with pkgs;
+    [
+      vim
+      wget
+      git
+      neovim
+      curl
+      killall
+      hdparm
+      hd-idle
+      coolercontrol.coolercontrold
+      lm_sensors
+      bind
+    ];
 
   programs.coolercontrol = {
     enable = true;
@@ -77,8 +83,63 @@
     CC_HOST_IP6 = "::";
   };
 
+  # competes with pi-hole
+  systemd.services.resolved.enable = false;
+
+  services.nginx = {
+    enable = true;
+
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+
+    virtualHosts."_" = {
+      default = true;
+      rejectSSL = true; # drop TLS handshakes for unknown names
+      locations."/".return = "404";
+    };
+
+    virtualHosts."torrent.server.net" = {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8080";
+        proxyWebsockets = true;
+      };
+    };
+
+    virtualHosts."pihole.server.net" = {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8081";
+        proxyWebsockets = true;
+      };
+    };
+
+    virtualHosts."immich.server.net" = {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:2283";
+        proxyWebsockets = true;
+      };
+    };
+
+    virtualHosts."coolercontrol.server.net" = {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:11987";
+        proxyWebsockets = true;
+      };
+    };
+
+    virtualHosts."prowlar.server.net" = {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:9696";
+        proxyWebsockets = true;
+      };
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [
     11987 # coolercontrol
+    80
+    443
   ];
 
   networking.firewall.allowedUDPPorts = [
