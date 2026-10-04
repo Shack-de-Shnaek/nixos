@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   unstable = import inputs.nixpkgs-unstable {
     system = pkgs.system;
@@ -6,11 +11,6 @@ let
   };
 in
 {
-  # users.users.qbittorrent = {
-  #   group = "qbittorrent";
-  #   isSystemUser = true;
-  # };
-
   services.qbittorrent = {
     enable = true;
     openFirewall = true;
@@ -33,5 +33,19 @@ in
     openFirewall = true;
   };
 
-  users.users.immich.extraGroups = [ "video" "render" ];
+  services.flaresolverr = {
+    enable = true;
+    port = 8191;
+    openFirewall = true;
+  };
+
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  users.users.immich.extraGroups = [
+    "video"
+    "render"
+  ];
 }

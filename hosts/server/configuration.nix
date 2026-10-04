@@ -2,26 +2,38 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../modules/common.nix
-      ../../modules/media-host.nix
-      ../../modules/pi-hole.nix
-      # ../../modules/nvidia.nix
-      inputs.home-manager.nixosModules.default
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/common.nix
+    ../../modules/media-host.nix
+    ../../modules/pi-hole.nix
+    # ../../modules/nvidia.nix
+    inputs.home-manager.nixosModules.default
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
   # Use provided UUIDs instead of blkid probing (required for btrfs subvolumes)
-  boot.kernelParams = [ "acpi_enforce_resources=lax" ];
-  boot.kernelModules = [ "coretemp" "f71882fg" "it87" "nct6687" ];
+  boot.kernelParams = [
+    "acpi_enforce_resources=lax"
+    "i915.enable_guc=3"
+  ];
+  boot.kernelModules = [
+    "coretemp"
+    "f71882fg"
+    "it87"
+    "nct6687"
+  ];
   boot.loader.grub.fsIdentifier = "provided";
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -34,20 +46,28 @@
   # services.xserver.videoDrivers = [ "nvidia" ];
   # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 
-  environment.systemPackages = with pkgs;
-    [
-      vim
-      wget
-      git
-      neovim
-      curl
-      killall
-      hdparm
-      hd-idle
-      coolercontrol.coolercontrold
-      lm_sensors
-      bind
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vpl-gpu-rt
     ];
+  };
+  hardware.enableRedistributableFirmware = true;
+
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    git
+    neovim
+    curl
+    killall
+    hdparm
+    hd-idle
+    coolercontrol.coolercontrold
+    lm_sensors
+    bind
+  ];
 
   programs.coolercontrol = {
     enable = true;
@@ -131,6 +151,13 @@
     virtualHosts."prowlar.server.net" = {
       locations."/" = {
         proxyPass = "http://127.0.0.1:9696";
+        proxyWebsockets = true;
+      };
+    };
+
+    virtualHosts."jellyfin.server.net" = {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8096";
         proxyWebsockets = true;
       };
     };
