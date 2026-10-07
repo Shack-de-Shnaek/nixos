@@ -11,12 +11,13 @@
         "192.168.50.1   router.net"
         "192.168.10.2   router2.net"
         "192.168.10.1   router3.net"
+        "192.168.10.136 pi.net"
         "192.168.10.20 dragan-desktop.net"
         "192.168.10.205 dragan-laptop.net"
       ];
-        misc.dnsmasq_lines = [
+      misc.dnsmasq_lines = [
         "address=/server.net/192.168.10.103"
-        ];
+      ];
     };
     lists = [
       {
@@ -45,7 +46,6 @@
         description = "firebog blocklist";
       }
 
-
       {
         url = "https://adaway.org/hosts.txt";
         type = "block";
@@ -65,7 +65,6 @@
         description = "firebog admiral blocklist";
       }
 
-
       {
         url = "https://v.firebog.net/hosts/Easyprivacy.txt";
         type = "block";
@@ -84,7 +83,6 @@
         enabled = true;
         description = "fademind extra blocklist";
       }
-
 
       {
         url = "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt";
@@ -119,8 +117,14 @@
   services.resolved = {
     enable = true;
     settings.Resolve = {
-      DNS = [ "1.1.1.1" "9.9.9.9" ];
-      FallbackDNS = [ "1.1.1.1" "9.9.9.9" ];
+      DNS = [
+        "1.1.1.1"
+        "9.9.9.9"
+      ];
+      FallbackDNS = [
+        "1.1.1.1"
+        "9.9.9.9"
+      ];
       Domains = [ "~." ];
     };
   };
