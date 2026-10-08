@@ -92,7 +92,7 @@
     description = "External HD spin down daemon";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -a /dev/sdb -i 600 -a /dev/sda";
+      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -a /dev/sdb -i 1800 -a /dev/sda";
       Restart = "on-failure";
       RestartSec = 5;
     };
