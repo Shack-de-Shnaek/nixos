@@ -3,7 +3,10 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  boot.supportedFilesystems = [ "nfs" "nfs4" ];
+  boot.supportedFilesystems = [
+    "nfs"
+    "nfs4"
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/Skopje";
@@ -63,7 +66,13 @@
   users.users."dragan" = {
     isNormalUser = true;
     description = "Dragan Nikolovski";
-    extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "docker"
+      "samba"
+    ];
     shell = pkgs.fish;
   };
 
