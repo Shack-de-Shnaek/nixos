@@ -21,86 +21,215 @@
     };
     lists = [
       {
-        url = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt";
-        type = "block";
-        enabled = true;
-        description = "hagezi blocklist";
-      }
-
-      {
         url = "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt";
         type = "block";
         enabled = true;
-        description = "KADhosts blocklist";
+        description = "";
       }
+
       {
         url = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts";
         type = "block";
         enabled = true;
-        description = "FadeMind blocklist";
-      }
-      {
-        url = "https://v.firebog.net/hosts/static/w3kbl.txt";
-        type = "block";
-        enabled = true;
-        description = "firebog blocklist";
+        description = "";
       }
 
-      {
-        url = "https://adaway.org/hosts.txt";
-        type = "block";
-        enabled = true;
-        description = "adaway blocklist";
-      }
       {
         url = "https://v.firebog.net/hosts/AdguardDNS.txt";
         type = "block";
         enabled = true;
-        description = "adguard blocklist";
+        description = "";
       }
+
       {
         url = "https://v.firebog.net/hosts/Admiral.txt";
         type = "block";
         enabled = true;
-        description = "firebog admiral blocklist";
+        description = "";
+      }
+
+      {
+        url = "https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://v.firebog.net/hosts/Easylist.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts";
+        type = "block";
+        enabled = true;
+        description = "";
       }
 
       {
         url = "https://v.firebog.net/hosts/Easyprivacy.txt";
         type = "block";
         enabled = true;
-        description = "Easyprivacy blocklist";
+        description = "";
       }
+
       {
         url = "https://v.firebog.net/hosts/Prigent-Ads.txt";
         type = "block";
         enabled = true;
-        description = "prigent ads blocklist";
+        description = "";
       }
+
       {
         url = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts";
         type = "block";
         enabled = true;
-        description = "fademind extra blocklist";
+        description = "";
+      }
+
+      {
+        url = "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt";
+        type = "block";
+        enabled = true;
+        description = "";
       }
 
       {
         url = "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt";
         type = "block";
         enabled = true;
-        description = "DandelionSprout blocklist";
+        description = "";
       }
+
       {
         url = "https://v.firebog.net/hosts/Prigent-Crypto.txt";
         type = "block";
         enabled = true;
-        description = "prigent crypto blocklist";
+        description = "";
       }
+
       {
         url = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts";
         type = "block";
         enabled = true;
-        description = "fademind extra extra blocklist";
+        description = "";
+      }
+
+      {
+        url = "https://phishing.army/download/phishing_army_blocklist_extended.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-malware.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://raw.githubusercontent.com/AssoEchap/stalkerware-indicators/master/generated/hosts";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://urlhaus.abuse.ch/downloads/hostfile/";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://lists.cyberhost.uk/malware.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      # maybe turn off some
+
+      {
+        url = "https://raw.githubusercontent.com/matomo-org/referrer-spam-blacklist/master/spammers.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://someonewhocares.org/hosts/zero/hosts";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://raw.githubusercontent.com/RooneyMcNibNug/pihole-stuff/master/SNAFU.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://malware-filter.gitlab.io/malware-filter/phishing-filter-hosts.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://v.firebog.net/hosts/Prigent-Malware.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://raw.githubusercontent.com/jarelllama/Scam-Blocklist/main/lists/wildcard_domains/scams.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://v.firebog.net/hosts/RPiList-Malware.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+
+      {
+        url = "https://v.firebog.net/hosts/RPiList-Phishing.txt";
+        type = "block";
+        enabled = true;
+        description = "";
       }
     ];
   };
