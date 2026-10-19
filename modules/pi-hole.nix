@@ -21,6 +21,12 @@
     };
     lists = [
       {
+        url = "https://adaway.org/hosts.txt";
+        type = "block";
+        enabled = true;
+        description = "";
+      }
+      {
         url = "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt";
         type = "block";
         enabled = true;
